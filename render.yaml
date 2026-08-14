@@ -2,6 +2,7 @@
   - type: web
     name: kapture-vapi-backend
     env: python
+    plan: free
     rootDir: Task_2_Vapi/vapi
     buildCommand: pip install -r backend/requirements.txt
     startCommand: python -m uvicorn backend.server:app --host 0.0.0.0 --port $PORT
