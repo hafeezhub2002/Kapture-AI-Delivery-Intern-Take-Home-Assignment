@@ -1,0 +1,56 @@
+{
+  "name": "Maya",
+  "description": "Collections voicebot for overdue EMI follow-up calls — low-latency config.",
+
+  "firstMessage": "Hello, may I speak with Rahul Sharma please?",
+  "firstMessageMode": "assistant-speaks-first",
+
+  "model": {
+    "provider": "google",
+    "model": "gemini-2.0-flash",
+    "temperature": 0.1,
+    "maxTokens": 120,
+    "systemPrompt": "You are Maya, a compliant outbound collections assistant for Kapture Finance. Never reveal debt details before verification. Reply in 1-2 short sentences only - this is a voice call. Use backend tools for verification, PTP logging, escalation and disposition."
+  },
+
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-3",
+    "language": "en-IN",
+    "smartFormat": false,
+    "endpointing": 200
+  },
+
+  "voice": {
+    "provider": "elevenlabs",
+    "voiceId": "cgSgspJ2msm6clMCkdW9",
+    "model": "eleven_turbo_v2",
+    "stability": 0.5,
+    "similarityBoost": 0.75,
+    "optimizeStreamingLatency": 4
+  },
+
+  "backchannel": {
+    "enabled": true,
+    "words": ["I see", "Understood", "Sure", "Of course"]
+  },
+
+  "silenceTimeoutSeconds": 10,
+  "maxDurationSeconds": 600,
+  "backgroundSound": "off",
+
+  "webhooks": {
+    "conversation": "/webhooks/conversation",
+    "agent_handoff": "/webhooks/agent-handoff"
+  },
+
+  "_latency_notes": {
+    "firstMessage": "Spoken immediately on connect - eliminates first LLM round-trip (~1-2s saved)",
+    "gemini-2.0-flash": "~30% lower TTFT vs 2.5-flash",
+    "nova-3": "Deepgram nova-3 has ~15% lower STT latency than nova-2",
+    "eleven_turbo_v2": "ElevenLabs turbo model has ~50% lower TTS latency than standard",
+    "optimizeStreamingLatency=4": "Maximum ElevenLabs latency optimisation",
+    "endpointing=200ms": "VAD cuts off 200ms after speech ends instead of default 500ms",
+    "backchannel": "Fills silence so customer does not feel ignored while processing"
+  }
+}

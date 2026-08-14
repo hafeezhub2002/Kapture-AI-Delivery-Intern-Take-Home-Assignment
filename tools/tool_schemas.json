@@ -1,0 +1,52 @@
+{
+  "tools": [
+    {
+      "name": "verify_customer",
+      "description": "Verify the customer before any financial disclosure.",
+      "parameters": {
+        "customer_id": "string",
+        "verification_value": "string"
+      }
+    },
+    {
+      "name": "get_account_details",
+      "description": "Fetch account details only after successful authentication.",
+      "parameters": {
+        "customer_id": "string"
+      }
+    },
+    {
+      "name": "log_promise_to_pay",
+      "description": "Record a promise-to-pay commitment.",
+      "parameters": {
+        "customer_id": "string",
+        "amount": "number",
+        "ptp_date": "string"
+      }
+    },
+    {
+      "name": "send_payment_link",
+      "description": "Generate a payment link for an approved channel.",
+      "parameters": {
+        "customer_id": "string",
+        "channel": "string"
+      }
+    },
+    {
+      "name": "escalate_to_agent",
+      "description": "Escalate the call to a human agent.",
+      "parameters": {
+        "customer_id": "string",
+        "reason": "string"
+      }
+    },
+    {
+      "name": "mark_disposition",
+      "description": "Persist the final call disposition.",
+      "parameters": {
+        "customer_id": "string",
+        "disposition": "string"
+      }
+    }
+  ]
+}
