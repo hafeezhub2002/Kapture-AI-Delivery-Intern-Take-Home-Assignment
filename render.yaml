@@ -1,0 +1,12 @@
+﻿services:
+  - type: web
+    name: kapture-vapi-backend
+    env: python
+    rootDir: Task_2_Vapi/vapi
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python -m uvicorn backend.server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
